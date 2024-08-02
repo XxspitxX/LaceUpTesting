@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaceUpTesting.Views.ProductDetailsView"
+             xmlns:viewModels="clr-namespace:LaceUpTesting.ViewModels"
+             xmlns:views="clr-namespace:LaceUpTesting.Views"
+             Shell.ForegroundColor="Black"
+             Background="#e2e2e2"
+             
+             Shell.BackgroundColor="White"
+             x:DataType="viewModels:ProductDetailsViewModel">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <VerticalStackLayout Grid.Row="0">
+            <Frame
+                Margin="0,-1,0,0"
+                Padding="0,40,0,15"
+                BackgroundColor="White"
+                BorderColor="Transparent"
+                CornerRadius="0"
+                HasShadow="False"
+                ZIndex="2"
+>
+                <Image
+                Margin="0"
+                Aspect="AspectFit"
+                HeightRequest="160"
+                Source="{Binding Product.Image}" /> 
+            </Frame>
+
+            <Frame
+                Margin="0,-70,0,0"
+                Padding="60"
+                BackgroundColor="White"
+                BorderColor="Beige"
+                CornerRadius="60"
+                HasShadow="False"
+                ZIndex="1" />
+        </VerticalStackLayout>
+
+        <ScrollView Grid.Row="1" VerticalScrollBarVisibility="Never">
+            <StackLayout >
+                <Label
+                     Padding="20,0"
+                     FontAttributes="Bold"
+                     FontFamily="AstoreEczarSemiBold"
+                     FontSize="Small"
+                     Text="Available"
+                     TextColor="Green"
+                     VerticalTextAlignment="Center" />
+
+                <Label
+                     Padding="20,10,20,0"
+                     FontFamily="AstoreEczarSemiBold"
+                     FontSize="21"
+                     Text="{Binding Product.Title}" />
+
+
+                <FlexLayout
+                     Margin="20,10,20,10"
+                     AlignItems="Center"
+                     Direction="Row"
+                     HeightRequest="45"
+                     JustifyContent="SpaceBetween">
+                <Label
+                     FontAttributes="Bold"
+                     FontFamily="AstoreEczarSemiBold"
+                     FontSize="24"
+                     Text="{Binding Product.Price, StringFormat='€{0:F2}'}"
+                     TextColor="Black"
+                     VerticalTextAlignment="Center" />
+                <Button
+                     Margin="0,0,0,0"
+                     Padding="10,5"
+                     BackgroundColor="#E7B844"
+                     BorderColor="Transparent"
+                     BorderWidth="0"          
+                     CornerRadius="10"
+                     FontAttributes="Bold"
+                     Command="{Binding AddCartCommandCommand, Mode=TwoWay}"
+                     FontFamily="AstoreEczarSemiBold"
+                     FontSize="Medium"
+                     Text="Add to cart"
+                     TextColor="White"
+                     VerticalOptions="Center" />
+            </FlexLayout>
+                <Frame
+                    Margin="0,5"
+                    Padding="15,12"
+                    BackgroundColor="#FFF"
+                    BorderColor="Transparent"
+                    CornerRadius="0"
+                    HasShadow="False">
+                    <StackLayout>
+                         <Label
+                              FontAttributes="Bold"
+                              FontFamily="AstoreEczarSemiBold"
+                              FontSize="17"
+                              Text="Product description" />
+
+                        <Label
+                              FontFamily="AstoreEczarSemiBold"
+                              FontSize="16"
+                              Padding="0,10"
+                              Text="{Binding Product.Description}"
+                              TextColor="DimGray" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame
+                      Margin="0,5"
+                      Padding="15,12"
+                      BackgroundColor="#FFF"
+                      BorderColor="Transparent"
+                      CornerRadius="0"
+                      HasShadow="False">
+                    <StackLayout>
+                        <Label
+                           FontAttributes="Bold"
+                          FontFamily="AstoreEczarSemiBold"
+                          FontSize="17"
+                          Text="Category" />
+                                <Label
+                          FontFamily="AstoreEczarSemiBold"
+                          FontSize="16"
+                          Text="{Binding Product.Category}"
+                          VerticalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+            </StackLayout>
+        </ScrollView>
+        
+    </Grid>
+</views:ContentPageBase>

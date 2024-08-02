@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="LaceUpTesting.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:LaceUpTesting"
+    xmlns:views="clr-namespace:LaceUpTesting.Views"
+    Shell.FlyoutBehavior="Disabled"
+    
+    Shell.BackgroundColor="{StaticResource Primary}"
+    Title="LaceUpTesting">
+
+    <TabBar Route="Main">
+        <ShellContent Title="Home" Route="Catalog"  Icon="home.svg" ContentTemplate="{DataTemplate views:ProductCatalogView}" />
+        <ShellContent Title="Cart" Route="Cart" Icon="cart.svg"  ContentTemplate="{DataTemplate views:CartCheckoutView}" />
+    </TabBar>
+
+</Shell>

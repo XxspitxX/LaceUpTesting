@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<views:ContentPageBase xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="LaceUpTesting.Views.CartCheckoutView"
+             xmlns:views="clr-namespace:LaceUpTesting.Views"
+             xmlns:viewModels="clr-namespace:LaceUpTesting.ViewModels"
+             xmlns:models="clr-namespace:LaceUpTesting.Models"
+             Title="CartCheckoutView"
+            Shell.NavBarIsVisible="False"
+             x:DataType="viewModels:CartViewModel">
+            <Grid>
+
+                    <ActivityIndicator
+                      HorizontalOptions="Center"
+                      IsRunning="{Binding IsBusy, Mode=TwoWay}"
+                      IsVisible="{Binding IsBusy ,Mode=TwoWay}"
+                      Grid.Row="1"
+                      VerticalOptions="Center" />
+                    
+                    <CollectionView
+                        x:Name="cart"
+                        ItemsSource="{Binding CartDetails, Mode=TwoWay}"
+                        SelectionMode="None"
+                        VerticalOptions="StartAndExpand"
+                        VerticalScrollBarVisibility="Always">
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="models:CartDetail">
+                        <Frame
+                             Margin="0,5"
+                             Padding="5"
+                             BackgroundColor="#F5F6F4"
+                             BorderColor="Transparent"
+                             CornerRadius="20">
+                            <Grid Padding="5">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="3*" />
+                                    <ColumnDefinition Width="auto" />
+                                </Grid.ColumnDefinitions>
+                                
+                                <Frame
+                                     Grid.Column="0"
+                                     Margin="10,10,0,0"
+                                     Padding="9,8"
+                                     BackgroundColor="White"
+                                     BorderColor="Transparent"
+                                     CornerRadius="15"
+                                     HorizontalOptions="StartAndExpand"
+                                     VerticalOptions="StartAndExpand">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+
+                                        <Label
+                                                 Grid.Column="0"
+                                                 Padding="0"
+                                                 FontFamily="AstoreEczarSemiBold"
+                                                 FontSize="14"
+                                                 LineBreakMode="WordWrap"
+                                                 Text="{Binding Product.Category, Converter={StaticResource FirstLetterUppercaseConverter}}"
+                                                 ZIndex="10" />
+                                        <Image
+                                             Grid.Column="1"
+                                             HeightRequest="22"
+                                             HorizontalOptions="End"
+                                             Source="arrow_next_small.svg"
+                                             VerticalOptions="Center"
+                                             WidthRequest="22" />   
+                                    </Grid>
+                                        </Frame>
+
+                                <Label
+                                     Grid.Column="0"
+                                     Margin="10,45,0,0"
+                                     Padding="2,10,0,0"
+                                     FontAttributes="Bold"
+                                     FontFamily="AstoreEczarSemiBold"
+                                     FontSize="14"
+                                     LineBreakMode="WordWrap"
+                                     MaxLines="2"
+                                     Text="{Binding Product.Title}" />
+
+                                <Grid Margin="15,100,0,0" HorizontalOptions="Start">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="38" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <ImageButton
+                                     Grid.Column="0"
+                                     BackgroundColor="Transparent" 
+                                     Command="{Binding DecremeantQualityCommandCommand, Source={RelativeSource AncestorType={x:Type viewModels:CartViewModel}}}"
+                                     CommandParameter="{Binding ., Mode=TwoWay}"
+                                     HeightRequest="20"
+                                     Source="minus.svg"
+                                     VerticalOptions="Center"
+                                     WidthRequest="20" />
+
+                                    <Frame
+                                         Grid.Column="1"
+                                         Margin="8,0"
+                                         Padding="7"
+                                         BackgroundColor="White"
+                                         BorderColor="Transparent"
+                                         CornerRadius="6"
+                                         HorizontalOptions="Fill"
+                                         VerticalOptions="Center">  
+                                    <Label
+                                         Padding="0"
+                                         FontFamily="AstoreEczarSemiBold"
+                                         FontSize="14"
+                                         HorizontalTextAlignment="Center"
+                                         LineBreakMode="WordWrap"
+                                         Text="{Binding Quantity, StringFormat='{0}'}"
+                                         VerticalTextAlignment="Center" />
+                                    </Frame>
+
+                                    <ImageButton
+                                         Grid.Column="2"
+                                         BackgroundColor="Transparent"
+                                         Command="{Binding IncremeantQualityCommandCommand, Source={RelativeSource AncestorType={x:Type viewModels:CartViewModel}}}"                                               
+                                         CommandParameter="{Binding ., Mode=TwoWay}"
+                                         HeightRequest="20"
+                                         Source="plus.svg"
+                                         VerticalOptions="Center"
+                                         WidthRequest="20" />
+                                </Grid>
+
+
+
+
+                                <Frame
+                                     Grid.Column="1"
+                                     Margin="5,0,0,0"
+                                     Padding="5"
+                                     BackgroundColor="White"
+                                     BorderColor="White"
+                                     CornerRadius="20">
+                                    <Grid>
+                                        <Image
+                                             Margin="15"
+                                             Aspect="AspectFit"
+                                             HeightRequest="90"
+                                             Source="{Binding Product.Image}"
+                                             WidthRequest="90" />
+
+                                        <Frame
+                                             Grid.Row="0"
+                                             Grid.Column="0"
+                                             Margin="0,4,4,0"
+                                             Padding="5"
+                                             BackgroundColor="#E7B944"
+                                             BorderColor="Transparent"
+                                             CornerRadius="10"
+                                             HorizontalOptions="End"
+                                             IsClippedToBounds="True"
+                                             VerticalOptions="Start">
+                                            <Label
+                                                 FontAttributes="Bold"
+                                                 FontSize="12"
+                                                 HorizontalOptions="Center"
+                                                 Text="{Binding Product.Price, StringFormat='€{0:F2}'}"
+                                                 TextColor="White"
+                                                 VerticalOptions="Center" />
+                                        </Frame>
+                                            </Grid>
+                                        </Frame>
+
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+            </Grid>
+
+</views:ContentPageBase>
