@@ -1,5 +1,4 @@
 using CommunityToolkit.Mvvm.Messaging;
-using LaceUpTesting.Messages;
 
 namespace LaceUpTesting.Views;
 
